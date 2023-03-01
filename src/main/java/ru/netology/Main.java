@@ -82,13 +82,14 @@ public class Main {
                 Node node_ = nodeList.item(i);
                 if (Node.ELEMENT_NODE == node_.getNodeType()) {
                     Element element = (Element) node_;
-                    Employee employee = new Employee(
-                            Long.parseLong(element.getElementsByTagName("id").item(i).getTextContent()),
-                            element.getElementsByTagName("firstName").item(i).getTextContent(),
-                            element.getElementsByTagName("lastName").item(i).getTextContent(),
-                            element.getElementsByTagName("country").item(i).getTextContent(),
-                            Integer.parseInt(element.getElementsByTagName("age").item(i).getTextContent()));
-                    staff.add(employee);
+                    NodeList nlID = element.getElementsByTagName("id");
+                    for (int j = 0; j < nlID.getLength(); j++) {
+                        staff.add(new Employee(Long.parseLong(nlID.item(j).getTextContent()),
+                                element.getElementsByTagName("firstName").item(j).getTextContent(),
+                                element.getElementsByTagName("lastName").item(j).getTextContent(),
+                                element.getElementsByTagName("country").item(j).getTextContent(),
+                                Integer.parseInt(element.getElementsByTagName("age").item(j).getTextContent())));
+                    }
                 }
             }
             return staff;
